@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioBeat Pro - Sonido Premium, Diseño Futuro</title>
+    <style>
+        /* --------------------------------------------------
+       1. VARIABLES CSS (El secreto del cambio)
+    -------------------------------------------------- */
+        :root {
+            /* Modo Claro (Profesional Minimalista) */
+            --bg-body: #f4f7f6;
+            --bg-header: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #1a1d21;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            /* Azul Profesional */
+            --primary-hover: #1d4ed8;
+            --accent: #f59e0b;
+            /* Naranja sutil */
+            --shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            --border-card: 1px solid #e2e8f0;
+
+            /* Detalles Neón (Solo visibles en Dark Mode, se definen aquí para usarlas) */
+            --neon-blue: #00f2fe;
+            --neon-magenta: #ff00de;
+            --neon-glow-blue: 0 0 10px rgba(0, 242, 254, 0.7);
+            --neon-glow-magenta: 0 0 15px rgba(255, 0, 222, 0.6);
+        }
+
+        /* CLASE PARA MODO OSCURO (Llamativo y Neón) */
+        body.dark-mode {
+            --bg-body: #050505;
+            /* Negro casi puro */
+            --bg-header: #000000;
+            --bg-card: #0a0a0a;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --primary: #ff00de;
+            /* Magenta Neón */
+            --primary-hover: #ff4fe0;
+            --accent: #00f2fe;
+            /* Cian Neón */
+            --shadow: 0 0 20px rgba(255, 0, 222, 0.2);
+            --border-card: 2px solid #00f2fe;
+            /* Borde Neón Cian */
+        }
+
+        /* --------------------------------------------------
+       2. ESTILOS BASE Y TRANSICIONES
+    -------------------------------------------------- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            /* Transición suave */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        /* --------------------------------------------------
+       3. BOTÓN FLOTANTE MODO OSCURO
+    -------------------------------------------------- */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark-mode-btn-bg, #1a1d21);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: var(--neon-magenta);
+            box-shadow: var(--neon-glow-magenta);
+            color: #000;
+        }
+
+        /* --------------------------------------------------
+       4. ENCABEZADO Y NAVEGACIÓN
+    -------------------------------------------------- */
+        header {
+            background-color: var(--bg-header);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: var(--shadow);
+            transition: background-color 0.4s ease;
+        }
+
+        body.dark-mode header {
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: var(--neon-glow-blue);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            transition: color 0.4s ease, text-shadow 0.4s ease;
+        }
+
+        body.dark-mode .logo {
+            text-shadow: var(--neon-glow-magenta);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        /* --------------------------------------------------
+       5. COMPONENTES: BOTONES Y FORMULARIOS
+    -------------------------------------------------- */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 3rem;
+            /* Más redondeado */
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Botón Neón en Dark Mode */
+        body.dark-mode .btn {
+            color: #000;
+            background-color: var(--neon-magenta);
+            box-shadow: var(--neon-glow-magenta);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: #ff4fe0;
+            box-shadow: 0 0 25px rgba(255, 0, 222, 0.9);
+        }
+
+        input,
+        textarea {
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        body.dark-mode input,
+        body.dark-mode textarea {
+            border: 1px solid var(--neon-blue);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus {
+            box-shadow: var(--neon-glow-blue);
+        }
+
+        /* --------------------------------------------------
+       6. GALERÍA DINÁMICA (CARRUSEL)
+    -------------------------------------------------- */
+        .carousel-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 3rem auto;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .carousel-container {
+            box-shadow: var(--neon-glow-blue);
+            border: 2px solid var(--neon-blue);
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+            height: 400px;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            width: 100%;
+            padding: 3rem 2rem 2rem;
+            text-align: left;
+        }
+
+        .slide-caption h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .slide-caption h2 {
+            color: var(--neon-blue);
+            text-shadow: var(--neon-glow-blue);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            color: #000;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        body.dark-mode .carousel-btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        /* --------------------------------------------------
+       7. BUSCADOR Y CATÁLOGO PRO
+    -------------------------------------------------- */
+        .search-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .section-title {
+            color: var(--neon-blue);
+            text-shadow: var(--neon-glow-blue);
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 550px;
+            margin: 2.5rem auto;
+            display: block;
+            border-radius: 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: var(--border-card);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode .product-card:hover {
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        body.dark-mode .product-title {
+            color: var(--neon-blue);
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        body.dark-mode .product-price {
+            color: var(--neon-magenta);
+            text-shadow: 0 0 5px rgba(255, 0, 222, 0.5);
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-right: 0.5rem;
+        }
+
+        /* --------------------------------------------------
+       8. FORMULARIO DE CONTACTO PREMIUM
+    -------------------------------------------------- */
+        .contact-section {
+            background-color: var(--bg-header);
+            padding: 5rem 1rem;
+            margin-top: 5rem;
+            transition: background-color 0.4s ease;
+        }
+
+        body.dark-mode .contact-section {
+            background-color: #000;
+            border-top: 2px solid var(--neon-magenta);
+        }
+
+        .contact-form {
+            max-width: 650px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow);
+            border: var(--border-card);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        body.dark-mode .contact-form {
+            border-color: var(--neon-magenta);
+            box-shadow: var(--neon-glow-magenta);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--neon-magenta);
+        }
+
+        /* --------------------------------------------------
+       9. MEDIA QUERIES (RESPONSIVE)
+    -------------------------------------------------- */
+        @media (min-width: 650px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1rem 5%;
+            }
+
+            nav ul {
+                margin-top: 0;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 950px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .carousel-slide {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BOTÓN FLOTANTE MODO OSCURO -->
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Cambiar Modo">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <div class="logo">AudioBeat<span style="color:var(--accent);">Pro</span></div>
+        <nav>
+            <ul>
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#promociones">Ofertas</a></li>
+                <li><a href="#productos">Catálogo</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="inicio">
+
+        <!-- GALERÍA DINÁMICA (CARRUSEL) -->
+        <section id="promociones" class="carousel-container">
+            <div class="carousel-slide" id="carouselSlide">
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80"
+                        alt="AudioBeat Elite">
+                    <div class="slide-caption">
+                        <h2>AudioBeat Elite Wireless</h2>
+                        <p>Sonido audiófilo sin cables. Edición limitada.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1200&q=80" alt="Sport Pro">
+                    <div class="slide-caption">
+                        <h2>Sport Pro Active</h2>
+                        <p>Resistencia extrema. Tu ritmo no para.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=1200&q=80"
+                        alt="Gaming Nexus">
+                    <div class="slide-caption">
+                        <h2>Nexus Gaming Headset</h2>
+                        <p>Inmersión total 7.1. Siente cada detalle.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+            <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+        </section>
+
+        <!-- BUSCADOR Y SECCIÓN DE PRODUCTOS -->
+        <section id="productos" class="search-section">
+            <h2 class="section-title">Ingeniería de Sonido Superior</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Explora nuestra colección premium
+                diseñada para la máxima fidelidad y confort.</p>
+
+            <input type="text" id="searchInput" class="search-box" placeholder="Buscar modelo, tecnología o uso...">
+
+            <div class="product-grid" id="productGrid">
+
+                <!-- Producto 1 -->
+                <div class="product-card" data-name="studio pro carbon cancellation bluetooth noise superior">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80"
+                        alt="Studio Pro Carbon">
+                    <h3 class="product-title">Studio Pro Carbon</h3>
+                    <p class="product-desc">Cancelación Activa de Ruido (ANC) híbrida y 40h de batería.</p>
+                    <div class="product-price-container">
+                        <div>
+                            <span class="price-old">$250.00</span>
+                            <span class="product-price">$189.99</span>
+                        </div>
+                    </div>
+                    <a href="#contacto" class="btn">Reservar</a>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card" data-name="alpha gaming headset 7.1 rgb microphone surround">
+                    <img src="https://images.unsplash.com/photo-1599669454699-248893623440?w=500&q=80"
+                        alt="Alpha Gaming">
+                    <h3 class="product-title">Alpha Gaming 7.1</h3>
+                    <p class="product-desc">Sonido espacial surround, micrófono retráctil y detalles RGB.</p>
+                    <div class="product-price-container">
+                        <div>
+                            <span class="price-old">$120.00</span>
+                            <span class="product-price">$95.50</span>
+                        </div>
+                    </div>
+                    <a href="#contacto" class="btn">Reservar</a>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card" data-name="velocity sport earbud ipx7 waterproof bluetooth">
+                    <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80"
+                        alt="Velocity Sport">
+                    <h3 class="product-title">Velocity Sport Buds</h3>
+                    <p class="product-desc">Ajuste ergonómico seguro, IPX7 a prueba de agua y sudor.</p>
+                    <div class="product-price-container">
+                        <div>
+                            <span class="price-old">$90.00</span>
+                            <span class="product-price">$59.99</span>
+                        </div>
+                    </div>
+                    <a href="#contacto" class="btn">Reservar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULARIO DE CONTACTO -->
+        <section id="contacto" class="contact-section">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="section-title">Soporte y Ventas Pro</h2>
+                <p style="color: var(--text-muted);">¿Interesado en una compra corporativa o soporte técnico?</p>
+            </div>
+
+            <form class="contact-form"
+                onsubmit="event.preventDefault(); alert('Solicitud enviada. Nos contactaremos pronto.');">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Corporativo / Personal</label>
+                    <input type="email" id="email" placeholder="mail@empresa.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Detalles de la consulta o pedido</label>
+                    <textarea id="mensaje" rows="5"
+                        placeholder="Describe el modelo de tu interés o tu consulta técnica..." required></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar Solicitud</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer style="background-color: #000; color: #a1a1aa; text-align: center; padding: 2rem; font-size: 0.9rem;">
+        <p>&copy; 2026 AudioBeat Technologies. Audio de Grado Profesional.</p>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // 1. Lógica del Modo Oscuro/Claro
+        const toggleBtn = document.getElementById('darkModeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Al cargar, verificar si hay preferencia guardada
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.textContent = '🌙';
+            }
+        });
+
+        // 2. Carrusel de Imágenes
+        const slide = document.getElementById('carouselSlide');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        });
+
+        // Avance automático cada 6 segundos
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }, 6000);
+
+        // 3. Buscador de Productos
+        const searchInput = document.getElementById('searchInput');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+
+            productCards.forEach(card => {
+                const productInfo = card.getAttribute('data-name');
+                if (productInfo.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
